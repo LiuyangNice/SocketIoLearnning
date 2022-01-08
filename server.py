@@ -10,18 +10,19 @@ def create_serve():
     @sio.event
     def connect(sid, environ):
         print('connect ', sid)
-        sio.emit('serve', {'response': 'connert success'})
+        print(environ)
+        sio.emit('server', {'response': f'{sid}connect success'})
 
     # @sio.on('client')
     # def on_message(sid, data):
     #     print('serve received a message!111', data)
     @sio.on('client')
     def another_event(sid, data):
-        print('serve received a message!', data)
+        print(f'serve received a message!{sid}', data)
     # @sio.event
     # def my_event(sid, data):
     #     print('message ', data)
-    #     sio.emit('serve', {'response': 'connert success'})
+    #     sio.emit('serve', {'response': 'connect success'})
     @sio.event
     def disconnect(sid):
         print('disconnect ', sid)

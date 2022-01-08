@@ -8,7 +8,7 @@ def create_client():
         print('connection established')
         sio.emit('client', {'foo': 'bar'})
 
-    @sio.on('serve')
+    @sio.on('server')
     def on_message(data):
         print('client received a message!',data)
     # @sio.event
@@ -26,7 +26,7 @@ def create_client():
         print('disconnected from server')
         sio.disconnect()
 
-    sio.connect('http://localhost:5000')
+    sio.connect('http://1.117.37.235:5000')
     sio.wait()
 
 create_client()
