@@ -25,7 +25,7 @@ def create_serve():
         sio.emit('client_count', {'client_count': sio.client_count})
         sio.emit('disconnection',{'response':f'{sid} disconnect'})
     if __name__ == '__main__':
-        eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 5000)), app)
+        eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 5000)), app)
     @sio.event()
     def on_message():
         print('received msg')
