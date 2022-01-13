@@ -13,7 +13,7 @@ def create_serve():
         sio.emit('connection', {'response': f'{sid} connect success'})
     @sio.on('chat message')
     def another_event(sid, data):
-        sio.emit('chat message', {'response': data})
+        sio.emit('chat message', data)
     @sio.event
     def disconnect(sid):
         print('disconnect ', sid)
