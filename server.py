@@ -9,9 +9,9 @@ def create_serve():
     })
     @sio.event
     def connect(sid, environ):
-        print('connect ', sid)
-        sio.emit('server', {'response': f'{sid} connect success'})
-    @sio.on('client')
+        print('chat message', sid)
+        sio.emit('chat message', {'response': f'{sid} connect success'})
+    @sio.on('chat message')
     def another_event(sid, data):
         sio.emit('server', {'response': data})
     @sio.event
