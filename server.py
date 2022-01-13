@@ -9,15 +9,15 @@ def create_serve():
     })
     @sio.event
     def connect(sid, environ):
-        print('chat message', sid)
-        sio.emit('chat message', {'response': f'{sid} connect success'})
+        print('connect', sid)
+        sio.emit('connection', {'response': f'{sid} connect success'})
     @sio.on('chat message')
     def another_event(sid, data):
-        sio.emit('server', {'response': data})
+        sio.emit('chat message', {'response': data})
     @sio.event
     def disconnect(sid):
         print('disconnect ', sid)
-        sio.emit('server',{'response':f'{sid} disconnect'})
+        sio.emit('disconnection',{'response':f'{sid} disconnect'})
     if __name__ == '__main__':
         eventlet.wsgi.server(eventlet.listen(('', 5000)), app)
     @sio.event()
