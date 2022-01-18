@@ -3,7 +3,7 @@ import socketio
 import pymongo as mgdb
 
 
-client = mgdb.MongoClient("localhost",27017)
+client = mgdb.MongoClient("0.0.0.0",27017)
 mydb  = client["chatDemo"]
 my_col = mydb["users"]
 def log_up(username,password,password2):
