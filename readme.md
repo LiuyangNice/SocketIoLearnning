@@ -4,3 +4,6 @@
 4.构建命令 docker build -t test:v1 .  
 5.运行命令docker run -d -p 5000:5000 --name test test:v1  
 6.docker push 需要先对镜像进行标记  docker tag test:v1 lyy007/test:v1 docker push lyy007/test:v1
+
+7.mongo 服务器开启
+c:\Program Files\MongoDB\Server\5.0\bin\mongod -dbpath c:\data\db

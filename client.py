@@ -7,12 +7,14 @@ def create_client():
     def connect():
         print('connection established')
         sio.emit('connection', {'foo': 'bar'})
-        sio.emit('chat message',{"test":"test"})
+        sio.emit('login', {"username": "111","password":"123123"})
 
     @sio.on('chat message')
     def on_message(data):
         print('client received a message!',data)
-
+    @sio.on('login')
+    def on_message(data):
+        print('login_data',data)
     @sio.on('connection')
     def on_message(data):
         print('client received a message!', data)
@@ -29,8 +31,8 @@ def create_client():
         print('disconnected from server')
         sio.disconnect()
 
-    sio.connect('http://127.0.0.1:5000')
-    # sio.connect('http://1.117.37.235:5000')
+    # sio.connect('http://127.0.0.1:5000')
+    sio.connect('http://1.117.37.235:5000')
     sio.wait()
 
 create_client()
