@@ -2,10 +2,10 @@ import os
 
 import eventlet
 import socketio
-import pymongo as mgdb
+# import pymongo as mgdb
 
 # os.system("sudo systemctl start mongod")
-client = mgdb.MongoClient("0.0.0.0",27017)
+# client = mgdb.MongoClient("0.0.0.0",27017)
 # mydb  = client["chatDemo"]
 # my_col = mydb["users"]
 # def sign_up(username,password,password2):
@@ -28,7 +28,7 @@ def create_serve():
     })
     @sio.event
     def connect(sid, environ):
-        print('connect', sid)
+        # print('connect', sid)
         sio.client_count +=1
         sio.emit('recent_msg',{"recent_msg":sio.recent_msg})
         sio.emit('client_count',{'client_count':sio.client_count})
@@ -38,7 +38,7 @@ def create_serve():
         sio.recent_msg.append(data) #存储最近信息
         if len(sio.recent_msg)>10:  #最近10条
             sio.recent_msg.remove(sio.recent_msg[0])
-        print(len(sio.recent_msg))
+        # print(len(sio.recent_msg))
         sio.emit('chat message', data)
     # @sio.on('logup')
     # def another_event(sid, data):
@@ -54,7 +54,7 @@ def create_serve():
 
     @sio.event
     def disconnect(sid):
-        print('disconnect ', sid)
+        # print('disconnect ', sid)
         sio.client_count -=1
         sio.emit('client_count', {'client_count': sio.client_count})
         sio.emit('disconnection',{'response':f'{sid} disconnect'})
