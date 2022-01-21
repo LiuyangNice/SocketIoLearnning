@@ -30,7 +30,7 @@ def create_serve():
     def connect(sid, environ):
         # print('connect', sid)
         sio.client_count +=1
-        sio.emit('recent_msg',{"recent_msg":sio.recent_msg})
+        sio.emit('recent_msg',{"recent_msg":sio.recent_msg},to=sid)
         sio.emit('client_count',{'client_count':sio.client_count})
         sio.emit('connection', {'response': f'{sid} connect success'})
     @sio.on('chat message')

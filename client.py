@@ -36,8 +36,8 @@ def create_client():
         print('disconnected from server')
         sio.disconnect()
 
-    # sio.connect('http://127.0.0.1:5000')
-    sio.connect('http://1.117.37.235:5000')
+    sio.connect('http://127.0.0.1:5000')
+    # sio.connect('http://1.117.37.235:5000')
     sio.wait()
 
 create_client()
