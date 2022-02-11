@@ -1,8 +1,6 @@
-FROM lyy007/mongo_env
+FROM python
 MAINTAINER lyy007
 ADD . /app
 WORKDIR /app
-RUN pip install pymongo
-RUN pip install eventlet
-RUN pip install python-socketio==5.5.0
+RUN pip install -r requirements.txt
 CMD python server.py
