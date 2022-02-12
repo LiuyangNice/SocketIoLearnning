@@ -66,7 +66,7 @@ def create_serve():
         sio.emit('disconnection', {'response': f'{sid} disconnect'})
 
     if __name__ == '__main__':
-        eventlet.wsgi.server(eventlet.listen(('127.0.0.1', 5000)), app)
+        eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 5000)), app)
 
     @sio.event()
     def on_message():
