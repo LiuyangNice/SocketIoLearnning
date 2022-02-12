@@ -10,7 +10,7 @@ def create_serve():
     sio = socketio.Server()
     sio.recent_msg = []
     sio.client_count = 0
-    app = socketio.WSGIApp(sio, static_files={'/': {'content_type': 'text/html', 'filename': 'index.html'}})
+    app = socketio.WSGIApp(sio, static_files={'/': {'content_type': 'text/html', 'filename': 'static/index.html'}})
     sio.mgdb_client = mgdb.MongoClient("localhost", 27017)
     sio.mydb = sio.mgdb_client['users']
     sio.userinfos = sio.mydb['userinfos']

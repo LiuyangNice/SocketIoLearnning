@@ -40,7 +40,8 @@ def create_client():
         sio.disconnect()
 
     # sio.connect('http://127.0.0.1:5000')
-    sio.connect('http://1.117.37.235:5000')
+    # sio.connect('http://1.117.37.235:8000')
+    sio.connect('http://180.184.75.128:5000/')
     sio.wait()
 
 
