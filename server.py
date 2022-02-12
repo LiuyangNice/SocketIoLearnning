@@ -46,7 +46,7 @@ def create_serve():
     def personal_event(sid, data):
         f = sio.userinfos.find_one({'sid': sid})
         t = sio.userinfos.find_one({'id': data['to']})
-        sio.emit('personal message', data['message'], to=t['sid'])
+        sio.emit('personal message', data, to=t['sid'])
         sio.chatting_records.insert_one({'from': f['id'], 'to': t['id'], 'message': data['message']})
 
     @sio.on('get personal message')  # 私人聊天记录
