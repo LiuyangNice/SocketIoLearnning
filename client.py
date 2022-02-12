@@ -3,14 +3,11 @@ import socketio
 
 def create_client():
     sio = socketio.Client()
+    sio.id = 123456
 
     @sio.event
     def connect():
-        print('connection established')
-        sio.emit('connection', {'foo': 'bar'})
-        sio.emit('login', {"username": "111", "password": "123123"})
-        for index in range(20):
-            sio.emit("chat message", {"index": index})
+        sio.emit('usrinfo', {'id': sio.id})
 
     @sio.on('chat message')
     def on_message(data):
@@ -42,8 +39,8 @@ def create_client():
         print('disconnected from server')
         sio.disconnect()
 
-    # sio.connect('http://127.0.0.1:5000')
-    sio.connect('http://1.117.37.235:5678')
+    sio.connect('http://127.0.0.1:5000')
+    # sio.connect('http://1.117.37.235:8000')
     sio.wait()
 
 
