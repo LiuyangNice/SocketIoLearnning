@@ -1,3 +1,4 @@
+import json
 import os
 
 import eventlet
@@ -32,7 +33,7 @@ def create_serve():
 
     @sio.on("usrinfo")  # 登录时上传个人信息
     def get_usrinfo(sid, data):
-        print(data)
+        data = json.load(data)
         sio.userinfos.insert_one({'sid': sid, 'id': data['id']})
         print(sio.userinfos.find_one({'sid': sid}))
 
