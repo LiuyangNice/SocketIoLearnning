@@ -14,7 +14,7 @@ sudo apt-get update
 sudo apt-get install docker-ce docker-ce-cli containerd.io
 ```
 #构建
-```
+```commandline
 docker build -t test:v1 . 
 ```
      
