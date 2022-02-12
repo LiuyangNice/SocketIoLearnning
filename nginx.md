@@ -1,9 +1,15 @@
-#nginx安装：  
-    sudo apt-get install nginx  
+#nginx安装:
+```commandline
+sudo apt-get install nginx
+```
 #nginx配置文件地址：  
-    cd /etc/nginx/conf.d  
+```commandline
+cd /etc/nginx/conf.d  
+```
 #重启nginx服务器：  
-    service nginx restart  
+```commandline
+service nginx restart  
+```
 #nginx配置示例
 ```
 upstream socketio_nodes {
