@@ -11,8 +11,8 @@ def create_serve():
     sio.recent_msg = []
     sio.client_count = 0
     app = socketio.WSGIApp(sio, static_files={'/': {'content_type': 'text/html', 'filename': 'static/index.html'}})
-    sio.mgdb_client = mgdb.MongoClient("mongodb://lyy:105014@mongoAuth:27017/lyy")
-    sio.mydb = sio.mgdb_client['lyy']
+    sio.mgdb_client = mgdb.MongoClient("mongodb://lyy:105014@mon:27017/server-data")
+    sio.mydb = sio.mgdb_client['server-data']
     sio.userinfos = sio.mydb['userinfos']
     sio.chatting_records = sio.mydb['chatting_records']
 
