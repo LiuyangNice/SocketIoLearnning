@@ -11,7 +11,7 @@ def create_serve():
     sio.recent_msg = []
     sio.client_count = 0
     app = socketio.WSGIApp(sio, static_files={'/': {'content_type': 'text/html', 'filename': 'static/index.html'}})
-    sio.mgdb_client = mgdb.MongoClient("mongodb://lyy:105014@mon:27017/server-data")
+    sio.mgdb_client = mgdb.MongoClient("mongodb://lyy:105014@mongoAuth:27017")
     sio.mydb = sio.mgdb_client['server-data']
     sio.userinfos = sio.mydb['userinfos']
     sio.chatting_records = sio.mydb['chatting_records']
@@ -34,10 +34,10 @@ def create_serve():
     @sio.on("usrinfo")  # 登录时上传个人信息
     def get_usrinfo(sid, data):
         try:
-            data = json.loads(data)
             sio.userinfos.insert_one({'sid': sid, 'id': data['id']})
             print(sio.userinfos.find_one({'sid': sid}))
         except TypeError:
+            data = json.loads(data)
             sio.userinfos.insert_one({'sid': sid, 'id': data['id']})
             print(sio.userinfos.find_one({'sid': sid}))
         else:
@@ -77,12 +77,12 @@ def create_serve():
         sio.emit('client_count', {'client_count': sio.client_count})
         sio.emit('disconnection', {'response': f'{sid} disconnect'})
 
-    if __name__ == '__main__':
-        eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 5000)), app)
-
     @sio.event()
     def on_message():
         pass  # print('received msg')
+
+    if __name__ == '__main__':
+        eventlet.wsgi.server(eventlet.listen(('0.0.0.0', 5000)), app)
 
 
 create_serve()
