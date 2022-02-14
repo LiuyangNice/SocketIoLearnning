@@ -11,8 +11,8 @@ def create_serve():
     sio.recent_msg = []
     sio.client_count = 0
     app = socketio.WSGIApp(sio, static_files={'/': {'content_type': 'text/html', 'filename': 'static/index.html'}})
-    sio.mgdb_client = mgdb.MongoClient("localhost", 27017)
-    sio.mydb = sio.mgdb_client['users']
+    sio.mgdb_client = mgdb.MongoClient("mongodb://lyy:105014@mongoAuth:27017/lyy")
+    sio.mydb = sio.mgdb_client['lyy']
     sio.userinfos = sio.mydb['userinfos']
     sio.chatting_records = sio.mydb['chatting_records']
 
@@ -38,7 +38,8 @@ def create_serve():
             sio.userinfos.insert_one({'sid': sid, 'id': data['id']})
             print(sio.userinfos.find_one({'sid': sid}))
         except TypeError:
-            print(data)
+            sio.userinfos.insert_one({'sid': sid, 'id': data['id']})
+            print(sio.userinfos.find_one({'sid': sid}))
         else:
             pass
 
@@ -46,8 +47,12 @@ def create_serve():
     def personal_event(sid, data):
         f = sio.userinfos.find_one({'sid': sid})
         t = sio.userinfos.find_one({'id': data['to']})
-        sio.emit('personal message', data, to=t['sid'])
-        sio.chatting_records.insert_one({'from': f['id'], 'to': t['id'], 'message': data['message']})
+        # 得到双方信息，接下来发送给接收者
+        if t is not None:
+            sio.emit('personal message', data, to=t['sid'])
+            sio.chatting_records.insert_one({'from': f['id'], 'to': t['id'], 'message': data['message']})
+        else:
+            sio.emit('personal message', {'error': 'no online'}, to=sid)
 
     @sio.on('get personal message')  # 私人聊天记录
     def get_personal_message(sid, data):

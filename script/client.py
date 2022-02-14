@@ -7,7 +7,8 @@ def create_client():
 
     @sio.event
     def connect():
-        sio.emit('usrinfo', {'id': sio.id, 'test':'t'})
+        print("dasdad")
+        sio.emit('usrinfo', {'id': sio.id, 'test': 't'})
 
     @sio.on('chat message')
     def on_message(data):
@@ -39,9 +40,9 @@ def create_client():
         print('disconnected from server')
         sio.disconnect()
 
-    # sio.connect('http://127.0.0.1:5000')
+    sio.connect('http://127.0.0.1:5000')
     # sio.connect('http://1.117.37.235:8000')
-    sio.connect('http://180.184.75.128:5000/')
+    # sio.connect('http://180.184.75.128:5000/')
     sio.wait()
 
 

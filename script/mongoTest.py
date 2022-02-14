@@ -1,9 +1,11 @@
 import pymongo as mgdb
 
-client = mgdb.MongoClient("localhost",27017)
-mydb = client["runoobdb"]
-mycol = mydb["sites"]
-# mycol.insert_one({"name":"lyy","password":"123123"})
+
+client = mgdb.MongoClient('mongodb://lyy:105014@mongoAuth:27017/lyy')
+
+mydb = client["lyy"]
+mycol = mydb["userinfos1"]
+mycol.insert_one({"name":"lyy","password":"123123"})
 x = mycol.find_one({"name":"lyy"})
 if x is not None:
     print(x["password"])
